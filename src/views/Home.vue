@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { Icon } from "@iconify/vue";
+import  env from '@/env.js';
 
 const movies = ref([]);
 const searchQuery = ref("");
@@ -40,7 +41,7 @@ const filteredMovies = computed(() => {
 const getMovies = async () => {
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=ed68fa5ba669c8299056cff706d28344"
+      `https://api.themoviedb.org/3/movie/popular?api_key=${env.apikey}`
     );
     if (!response.ok) {
       throw new Error("Veri alınamadı");
@@ -64,7 +65,7 @@ onMounted(() => {
 
 
 <template>
-  <div class="home">
+  <div class="home ">
     <div class="w-full flex justify-center">
       <div class="w-64 mx-3">
         <div
@@ -133,51 +134,4 @@ onMounted(() => {
 </template>
 
 
-<style lang="scss" scoped>
-.home {
-  @apply text-center justify-center;
-  .card {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 relative;
-    .card-style {
-      @apply m-4 border-4 border-green-700 flex flex-col justify-center rounded-2xl shadow-2xl shadow-green-700 relative;
-      .heart-div{
-        @apply absolute top-2 right-2 rounded-full bg-green-200 p-3 text-center flex items-center justify-center cursor-pointer shadow-2xl shadow-green-700 z-10;
-      }
-    }
-    .card-image {
-      @apply block rounded-t-xl w-full h-[600px] object-cover relative z-0;
-    }
-    .detail {
-      @apply p-4 rounded-b-xl max-h-80 truncate flex flex-col;
-      background-color: rgba(0, 0, 0, 0.6);
-      .detail-style{
-        @apply flex flex-row justify-between p-4;
-        .detail-flex {
-          @apply text-white space-x-2 text-lg text-center items-center flex flex-row;
-          .icon-date {
-            @apply w-6 h-6 text-green-400;
-          }
-        }
-        .vote-title {
-          @apply bg-green-700 p-2 rounded-l-xl;
-        }
-        .vote-average {
-          @apply bg-gray p-2 rounded-r-xl;
-        }
-      }
-      .title-movie {
-        @apply text-green-400 text-2xl font-bold mb-5;
-      }
-      h3 {
-        @apply text-green-400 text-2xl font-bold mb-5;
-      }
-      p {
-        @apply text-white text-lg;
-      }
-    }
-  }
-}
-input {
-  @apply my-4 p-2 rounded-r-xl focus:shadow-2xl border-4 border-green-700 shadow-green-700 bg-green-700;
-}
-</style>
+

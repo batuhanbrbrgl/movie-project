@@ -1,3 +1,3 @@
-export default{
-    apikey:"e890dfd994c83e483190f308efc55408"
+export default {
+    apikey: "ed68fa5ba669c8299056cff706d28344"
 }

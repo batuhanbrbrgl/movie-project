@@ -1,3 +1,22 @@
+
+<script setup>
+import { ref, onBeforeMount } from "vue";
+import { useRoute } from "vue-router";
+import  env from '@/env.js';
+
+
+
+const route = useRoute();
+const movie = ref({});
+
+onBeforeMount(async () => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${env.apikey}`
+  );
+  movie.value = await res.json();
+});
+</script>
+
 <template>
   <div class="mx-6 rounded-3xl">
     <div
@@ -46,17 +65,3 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onBeforeMount } from "vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-const movie = ref({});
-
-onBeforeMount(async () => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=ed68fa5ba669c8299056cff706d28344`
-  );
-  movie.value = await res.json();
-});
-</script>
